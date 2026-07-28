@@ -8,7 +8,7 @@
   "type": "module",
   "config": {
     "extensionName": "Echoes of Aincrad",
-    "issueTracker": "https://github.com/d3Ex22/game-echoesofaincrad/issues"
+    "issueTracker": "https://github.com/d3Ex22/VortexExtensions/issues"
   },
   "scripts": {
     "copyassets": "copyfiles -f ./src/assets/** ./dist/",
