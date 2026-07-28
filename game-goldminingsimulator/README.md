@@ -43,6 +43,6 @@ Restart Vortex after `copyplugin`.
 | --- | --- |
 | Loose `.dll` or `<Mod>/…` (+ optional `Assets/`) | plugins |
 | `plugins/` / `patchers/` / `config/` at archive root | root |
-| `BepInEx/plugins|patchers|config/…` | root (GMS strips the `BepInEx/` prefix) |
+| `BepInEx/plugins/…` (also `patchers/`, `config/`) | root (GMS strips the `BepInEx/` prefix) |
 
 Injector packs (`winhttp.dll`, `BepInEx/core`, …) stay with `modtype-bepinex`.
