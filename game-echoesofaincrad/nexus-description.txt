@@ -1,0 +1,283 @@
+[color=#d4d4d8][b][size=4]Description[/size][/b][/color]
+[color=#d4d4d8]Vortex game extension for Echoes of Aincrad.
+It discovers the Steam install, installs/deploys the usual mod types for this game (UE4SS, Lua, shared libs, LogicMods, asset PAKs, bitfix, etc.), and keeps UE4SS Lua load order in sync through Vortex Load Order → mods.txt.
+PAK (~mods) and LogicMods load order is handled with folder prefixes (AAA-<modId>/, AAB-<modId>/, …).[/color]
+
+[b][size=4]Installation[/size][/b]
+Automatic:
+1. Install the extension from Vortex / Nexus
+2. Search for the game in Vortex, then click Manage
+
+Manual:
+1. Download the archive
+2. Open Vortex
+3. Go to Home → Extensions
+4. Drag and drop the file into "Drop File(s)"
+5. Enable the extension
+6. Restart Vortex
+7. Go to Home → Games
+8. Search for Echoes of Aincrad and click Manage
+
+[b][size=4]Main Features[/size][/b]
+[list]
+[*]Steam game discovery[/*]
+[/list]
+[list]
+[*]Offers UE4SS install from Nexus if missing[/*]
+[/list]
+[list]
+[*]Offers bitfix install from Nexus when a bitfix mod needs it[/*]
+[/list]
+[list]
+[*]Lua / DLL load order via mods.txt[/*]
+[/list]
+[list]
+[*]PAK ~mods + LogicMods load order via AAA- folder prefixes[/*]
+[/list]
+[list]
+[*]Multiple mod types + mixed/combined packs[/*]
+[/list]
+
+[b][size=4]Managed Mod Types[/size][/b]
+
+Notes:
+- Markers are optional; folder layout is preferred.
+- Marker files are never deployed.
+- enabled.txt is always ignored. Enable / reorder Lua + DLL through Vortex Load Order → mods.txt.
+- PAK ~mods and LogicMods order use folder prefixes: AAA-<modId>/, AAB-<modId>/, … (not filename prefixes).
+
+[b]BitFix Mods[/b]
+[spoiler]
+[b]Format accepted:[/b]
+<ModName>.lua
+OR
+bitfix/<ModName>/*.lua
+OR
+.lua + marker
+
+[b]Markers:[/b]
+bitfix.info | .bitfix | .bitfixmod
+
+[b]Where placed:[/b]
+EchoesofAincrad/Binaries/Win64/bitfix/[/spoiler]
+
+[b]Lua Mods[/b]
+[spoiler]
+[b]Format accepted:[/b]
+<ModName>/Scripts/*.lua
+OR
+any .lua archive with a Lua marker (and not a shared-lib layout)
+
+[b]Markers:[/b]
+ue4ssmod.info | .ue4ssmod | .luamod
+
+[b]Where placed:[/b]
+EchoesofAincrad/Binaries/Win64/ue4ss/Mods/<ModName>/
+
+[b]Example:[/b]
+MyCoolMod/Scripts/main.lua
+MyCoolMod/.luamod (optional)[/spoiler]
+
+[b]Lua Shared Libs[/b]
+[spoiler]
+[b]Format accepted:[/b]
+shared/<LibName>/...
+OR
+<LibName>/<LibName>.lua (no Scripts/ folder)
+
+[b]Markers:[/b]
+ue4sslib.info | .ue4sslib | .sharedlib
+
+[b]Where placed:[/b]
+EchoesofAincrad/Binaries/Win64/ue4ss/Mods/shared/<LibName>/
+
+[b]Example:[/b]
+shared/MyLib/MyLib.lua
+OR
+MyLib/MyLib.lua
+MyLib/.sharedlib (optional)[/spoiler]
+
+[b]Lua DLLs[/b]
+[spoiler]
+[b]Format accepted:[/b]
+<ModName>/dlls/*.dll
+OR
+.dll archive with a DLL marker
+
+[b]Markers:[/b]
+ue4ssdll.info | .ue4ssdll | .dllmod
+
+[b]Where placed:[/b]
+EchoesofAincrad/Binaries/Win64/ue4ss/Mods/<ModName>/
+
+[b]Example:[/b]
+MyDllMod/dlls/MyDllMod.dll
+MyDllMod/.dllmod (optional)[/spoiler]
+
+[b]Signature patches (Lua + SIG)[/b]
+[spoiler]
+[b]Format accepted:[/b]
+Mods/<ModName>/Scripts/*.lua + UE4SS_Signatures/*.lua
+OR
+marker
+
+[b]Markers:[/b]
+ue4sssig.info | .ue4sssig | .sigmod
+
+[b]Where placed:[/b]
+EchoesofAincrad/Binaries/Win64/ue4ss/Mods/<ModName>/
+EchoesofAincrad/Binaries/Win64/ue4ss/UE4SS_Signatures/
+
+[b]Example:[/b]
+Mods/CompanionBeQuiet/Scripts/main.lua
+UE4SS_Signatures/FName_Constructor.lua
+.ue4sssig (optional)[/spoiler]
+
+[b]PAK ~mods[/b]
+[spoiler]
+[b]Format accepted:[/b]
+~mods/*.pak / .ucas / .utoc
+OR
+~mods/<Folder>/*.pak / .ucas / .utoc
+OR
+flat .pak (+ marker)
+
+[b]Markers:[/b]
+ue4sspak.info | .ue4sspak | .assetpak | .pakmod
+
+[b]Where placed:[/b]
+EchoesofAincrad/Content/Paks/~mods/AAA-<modId>/
+(load order via folder prefixes)
+
+[b]Example:[/b]
+~mods/MyAssets.pak
+OR
+MyAssets.pak
+.assetpak[/spoiler]
+
+[b]PAK LogicMods[/b]
+[spoiler]
+[b]Format accepted:[/b]
+LogicMods/*.pak
+OR
+LogicMods/<Folder>/*.pak
+OR
+flat .pak + marker
+
+[b]Markers:[/b]
+ue4sslogicmod.info | .ue4sslogicmod | .logicmod
+
+[b]Where placed:[/b]
+EchoesofAincrad/Content/Paks/LogicMods/AAA-<modId>/
+(load order via folder prefixes; flat + 1-level subfolders both work in-game)
+
+[b]Example:[/b]
+LogicMods/MyLogic.pak
+OR
+MyLogic.pak
+.logicmod[/spoiler]
+
+[b]PAK IoStore[/b]
+[spoiler]
+[b]Format accepted:[/b]
+.utoc (+ .ucas), no .pak
+OR
+IoStore marker + .utoc/.ucas
+
+[b]Markers:[/b]
+ue4ssiostore.info | .ue4ssiostore | .iostore
+
+[b]Where placed:[/b]
+EchoesofAincrad/Content/Paks/~mods/
+
+[b]Example:[/b]
+MyIoStore.utoc
+MyIoStore.ucas
+.iostore (optional)[/spoiler]
+
+[b]PAK Alt mods[/b]
+[spoiler]
+[b]Format accepted:[/b]
+.pak under a Paks/ path that is not ~mods/
+OR
+.pak + PAK Alt marker
+
+[b]Markers:[/b]
+ue4sspakalt.info | .ue4sspakalt | .pakalt
+
+[b]Where placed:[/b]
+EchoesofAincrad/Content/Paks/... (keeps subfolders under Paks/)
+
+[b]Example:[/b]
+SomeMod/Paks/SubFolder/MyAlt.pak
+OR
+MyAlt.pak
+.pakalt[/spoiler]
+
+[b]Content mods[/b]
+[spoiler]
+[b]Format accepted:[/b]
+Top-level Content/ or Config/
+OR
+Content marker
+
+[b]Markers:[/b]
+ue4sscontent.info | .ue4sscontent | .contentmod
+
+[b]Where placed:[/b]
+EchoesofAincrad/Content/... or EchoesofAincrad/Config/...
+
+[b]Example:[/b]
+Content/MyStuff/...
+OR
+Config/MyIni.ini
+.contentmod (optional)[/spoiler]
+
+[b]Root (mixed / combined / binaries)[/b]
+[spoiler]
+For packs that mix several deploy targets, full game trees, or loose .dll/.exe in Win64.
+
+[b]Format accepted:[/b]
+EchoesofAincrad/ or Engine/ tree
+OR
+mixed folders (ue4ss, Mods, ~mods, LogicMods, bitfix, Content, …)
+OR
+loose .dll / .exe for Binaries/Win64
+OR
+Root / combo / multi / binaries marker
+
+[b]Markers:[/b]
+ue4ssroot.info | .ue4ssroot | .rootmod
+(aliases: ue4sscombo / .combomod, ue4ssmulti / .multimod, ue4ssbinaries / .binariesmod)
+
+[b]Where placed:[/b]
+Game install root (each bucket mapped to the right path)
+
+[b]Example:[/b]
+EchoesofAincrad/Content/...
+Engine/...
+OR
+Mods/MyMod/Scripts/main.lua
+~mods/MyAssets.pak
+.rootmod (optional)[/spoiler]
+
+[b][size=4]Mixed packs[/size][/b]
+If a mod ships more than one type at once, use the Root layout (or a Root/combo/multi marker). Vortex will split/deploy the pieces to the right places.
+
+[b][size=4]Credits[/size][/b]
+Thanks to [b]Game Studio Inc.[/b] and [b]Bandai Namco Entertainment Inc.[/b] for Echoes of Aincrad.
+Thanks to the [url=https://github.com/UE4SS-RE/RE-UE4SS]UE4SS[/url] / RE-UE4SS contributors for the Unreal modding framework this extension builds around.
+
+[b][size=4]Troubleshooting[/size][/b]
+Questions / bug reports: message me here or open an issue on GitHub.
+
+Repo:
+https://github.com/d3Ex22/VortexExtensions
+
+[b]This Extension have been made mostly using AI to obtain a quick working POC.
+[/b]2.0.0 is planned as a full rewrite without the use of AI for logic and stability
+
+[b][size=4]Changelog[/size][/b]
+[size=3]1.0.2 — First stable release[/size]
+[size=3]1.1.0 — bitfix mods, signature patches, multi mod type / Root support[/size]
+[size=3]1.1.1 — Fix disabled Lua leftovers, UE4SS dependency recursion, SIG overwrites; LogicMods load order via AAA-<modId>/ folders[/size]

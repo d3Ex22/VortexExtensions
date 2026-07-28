@@ -1,0 +1,103 @@
+[color=#d4d4d8][b][size=4]Description[/size][/b][/color]
+[color=#d4d4d8]Vortex game extension for Gold Mining Simulator (Unity Mono).
+It discovers the Steam install, downloads BepInEx from GitHub when missing (via Vortex modtype-bepinex), and deploys the usual BepInEx mod layouts used on Nexus for this game — including archives that already contain a BepInEx/ folder.[/color]
+
+[b][size=4]Installation[/size][/b]
+Automatic:
+1. Install the extension from Vortex / Nexus
+2. Search for the game in Vortex, then click Manage
+
+Manual:
+1. Download the archive
+2. Open Vortex
+3. Go to Home → Extensions
+4. Drag and drop the file into "Drop File(s)"
+5. Enable the extension
+6. Restart Vortex
+7. Go to Home → Games
+8. Search for Gold Mining Simulator and click Manage
+
+Then enable [b]Bepis Injector Extensible[/b] (BepInEx) in the Mods page if Vortex offers it, and Deploy.
+
+[b][size=4]Main Features[/size][/b]
+[list]
+[*]Steam game discovery (App ID 451340)[/*]
+[/list]
+[list]
+[*]Auto-download BepInEx 5.4.23.5 win_x64 from GitHub when missing[/*]
+[/list]
+[list]
+[*]BepInEx plugins / patchers / root mod types (modtype-bepinex)[/*]
+[/list]
+[list]
+[*]Installer for archives packaged as BepInEx/plugins|patchers|config/...[/*]
+[/list]
+
+[b][size=4]Requirements[/size][/b]
+- Vortex with the built-in [b]modtype-bepinex[/b] extension
+- Gold Mining Simulator (Steam)
+
+Steam may install the game under a folder named "Gold Rush The Game". Discovery uses the Steam App ID, so the folder name does not matter. Required file: GoldMiningSimulator.exe.
+
+[b][size=4]Managed Mod Types[/size][/b]
+
+[b]Bepis Injector Extensible (BepInEx)[/b]
+[spoiler]
+[b]Format accepted:[/b]
+Official BepInEx zip (winhttp.dll, doorstop_config.ini, BepInEx/core, …)
+
+[b]Where placed:[/b]
+Game install root[/spoiler]
+
+[b]BepInEx (plugins)[/b]
+[spoiler]
+[b]Format accepted:[/b]
+<Mod>.dll
+OR
+<ModFolder>/<Mod>.dll (+ optional Assets/)
+
+[b]Where placed:[/b]
+BepInEx/plugins/
+
+[b]Example:[/b]
+LongerLegs.dll
+OR
+HandSmelting/HandSmelting.dll
+HandSmelting/Assets/...[/spoiler]
+
+[b]BepInEx (patchers)[/b]
+[spoiler]
+[b]Format accepted:[/b]
+Preloader patcher DLLs
+
+[b]Where placed:[/b]
+BepInEx/patchers/[/spoiler]
+
+[b]BepInEx (root)[/b]
+[spoiler]
+[b]Format accepted:[/b]
+plugins/ / patchers/ / config/ at archive root
+OR
+BepInEx/plugins/… / BepInEx/patchers/… / BepInEx/config/…
+(the BepInEx/ prefix is stripped so files land correctly)
+
+[b]Where placed:[/b]
+BepInEx/
+
+[b]Example:[/b]
+BepInEx/plugins/Better_Dynamite.dll
+→ BepInEx/plugins/Better_Dynamite.dll[/spoiler]
+
+[b][size=4]Credits[/size][/b]
+Thanks to [b]Code Horizon[/b] and [b]PlayWay S.A.[/b] for Gold Mining Simulator.
+Thanks to the Nexus Mods team for the official Vortex [b]modtype-bepinex[/b] extension — this game support builds on it for BepInEx download, Doorstop setup, and the plugins / patchers / root mod types.
+Thanks also to the [url=https://github.com/BepInEx/BepInEx]BepInEx[/url] project.
+
+[b][size=4]Troubleshooting[/size][/b]
+Questions / bug reports: message me here or open an issue on GitHub.
+
+Repo:
+https://github.com/d3Ex22/VortexExtensions
+
+[b][size=4]Changelog[/size][/b]
+[size=3]1.0.0 — Initial release: Steam discovery, BepInEx GitHub download, BepInEx/-prefixed archive support[/size]
