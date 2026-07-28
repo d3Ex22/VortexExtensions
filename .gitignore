@@ -1,6 +1,7 @@
 node_modules/
 dist/
 out/
+_references/
 *.log
 .DS_Store
 .env

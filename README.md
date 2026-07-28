@@ -1,24 +1,20 @@
 # VortexExtensions
 
-Monorepo for Vortex game extensions.
+Vortex game extensions.
 
-## Extensions
-
-| Folder | Game | Nexus domain |
-|---|---|---|
-| [`game-echoesofaincrad/`](./game-echoesofaincrad) | Echoes of Aincrad | `echoesofaincrad` |
+| Folder | Game | Nexus domain | Loader |
+| --- | --- | --- | --- |
+| [`game-echoesofaincrad/`](./game-echoesofaincrad) | Echoes of Aincrad | `echoesofaincrad` | UE4SS |
+| [`game-goldminingsimulator/`](./game-goldminingsimulator) | Gold Mining Simulator | `goldminingsimulator` | BepInEx |
 
 ## Releases
 
-Each extension is versioned and released independently.
+One tag / release per extension: `<folder>-v<semver>` (e.g. `game-goldminingsimulator-v1.0.0`).
 
-- Tag format: `<folder>-v<semver>` (e.g. `game-echoesofaincrad-v1.1.1`)
-- Each GitHub Release attaches that extension’s zip only
-
-## Build an extension
+## Build
 
 ```powershell
-cd game-echoesofaincrad
+cd game-goldminingsimulator
 npm install
 npm run build
 ```
